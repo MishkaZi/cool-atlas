@@ -7,11 +7,32 @@ const init = async () => {
   }
 };
 
+const search = async () => {
+  try {
+    const searchInput = $("#search-input").val();
+    const countries = await getAll();
+    const filteredCountries = countries.filter((country) => {
+      return country.name.toLowerCase().includes(searchInput);
+    });
+    if (filteredCountries.length === 0) {
+      $(".ats-list>*").remove();
+      $(".ats-list").append(`
+        <div>
+          <h1>There is no countries matching your search!</h1>
+        </div>
+    `);
+    } else {
+      updatePage(filteredCountries);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const updatePage = (countries) => {
   try {
     $(".ats-list>*").remove();
     for (let i = 0; i < countries.length; i++) {
-      const id = countries[i].name;
       $(".ats-list")
         .append(`<div class="ats-country" id="${countries[i].name}" onClick="selectOne(id)">${countries[i].name}<img src="${countries[i].flag}"/> </div>
       `).onclick = (e) => {
@@ -39,7 +60,7 @@ const getAll = () => {
   });
 };
 
-const getOne = async (countryName) => {
+const getOne = (countryName) => {
   return $.ajax({
     method: "GET",
     url: `https://restcountries.eu/rest/v2/name/${countryName}`,

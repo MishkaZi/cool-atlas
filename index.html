@@ -4,17 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Document</title>
+    <title>Cool Atlas</title>
   </head>
   <body>
     <div class="ats-container">
       <header class="ats-header">
-        <h6 class="ats-title">My Atlas</h6>
-        <button class="ats-all-countries" onclick="init()">All Countries</button>
+        <h1 class="ats-title">My Atlas</h1>
+        <button class="ats-all-countries" onclick="init()">
+          All Countries
+        </button>
+        <div class="search-div">
+          <input id="search-input" type="text" placeholder="Search.." name="search" />
+          <button type="submit" onclick="search()">Search</button>
+        </div>
       </header>
       <aside class="ats-aside"></aside>
       <main class="ats-main">
-          <ul class="ats-list"></ul>
+        <div class="ats-list"></div>
       </main>
       <footer class="ats-footer"></footer>
     </div>
